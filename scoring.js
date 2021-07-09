@@ -15,9 +15,6 @@ function calculateScore(player) {
     case ('TE'):
       score = calculateTEScore(player.stats)
       break
-
-    default:
-      return 0
   }
 
   return score
@@ -25,9 +22,9 @@ function calculateScore(player) {
 
 // QB Score function
 function calculateQBScore(stats) {
-  let passingTouchdownScore = stats.passing.touchdowns * scoringTouchdown
+  let passingTouchdownScore = stats.passing.touchdowns * td
   let passingYardsScore = stats.passing.yards / 25
-  let rushingTouchdownScore = stats.rushing.touchdowns * scoringTouchdown
+  let rushingTouchdownScore = stats.rushing.touchdowns * td
   let rushingYards = stats.rushing.yards / 10
 
   return passingTouchdownScore + passingYardsScore + rushingTouchdownScore + rushingYards
@@ -35,10 +32,23 @@ function calculateQBScore(stats) {
 
 // RB Score function
 function calculateRBScore(stats) {
-  let receivingYardsScore = stats.receiving.yards / 10
+  let rushingYardsScore = stats.rushing.yards / 10
+  let rushingTouchdownScore = stats.rushing.touchdowns * td
+  let rushingFumbleScore = stats.rushing.fumbles * turnover
   let receptionScore = stats.receiving.receptions * received
+  let receivingYardsScore = stats.receiving.yards / 10
+  let receivingTouchdownScore = stats.receiving.touchdowns * td
+  let receivingFumbleScore = stats.receiving.fumbles * turnover
+  let kickreturnYardsScore = stats.return.kickreturn.yards / 15
+  let kickreturnTouchdownScore = stats.return.kickreturn.touchdowns * td
+  let kickreturnFumbleScore = stats.return.kickreturn.fumbles * turnover
+  let puntreturnYardsScore = stats.return.puntreturn.yards / 15
+  let puntreturnTouchdownScore = stats.return.puntreturn.touchdowns * td
+  let puntreturnFumbleScore = stats.return.puntreturn.fumbles * turnover
 
-  return receivingYardsScore + receptionScore
+  return rushingYardsScore + rushingTouchdownScore + rushingFumbleScore + receivingYardsScore +
+  receptionScore + receivingTouchdownScore + receivingFumbleScore + kickreturnYardsScore + kickreturnTouchdownScore +
+  kickreturnFumbleScore + puntreturnYardsScore + puntreturnTouchdownScore + puntreturnFumbleScore
 }
 
 // WR Score function
@@ -56,8 +66,8 @@ function calculateTEScore(stats) {
 }
 
 // Default variable for Calculations
-const scoringTouchdown = 6
+const td = 6
 const turnover = -3
 const received = 1
 
-modules.exports = calculateScore
+module.exports = calculateScore
