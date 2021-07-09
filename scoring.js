@@ -1,14 +1,29 @@
 function calculateScore(player) {
-  let qbScore = (passingYards + passingTd + intercept)
+  let score = 0;
+  switch(player.position) {
+    case("QB"):
+    score = calculateQBScore(player.stats);
+    break;
+    case("RB"):
+    score = calculateRBScore(player.stats);
+    break;
+    case("WR"):
+    score = calculateWRScore(player.stats);
+    break;
+    case("TE"):
+    score = calculateTEScore(player.stats);
+    break;
 
-  return qbScore
+    default:
+      return 0
+  }
 }
 
-// Variables for calculations
-let passingYards = (this.yards / 25)
-let passingTd = (this.touchdowns * 6)
-let intercept = Number(this.interceptions * -3)
-// let rushYards = (this.rushing.yards * 6)
+function calculateQBScore(stats) {
+}
 
-// eslint-disable-next-line no-console
-console.log(passingYards)
+// Variable for Calculations
+const scoringTouchdown = 6,
+const turnover = -3,
+let passingYards = (stats.passing.yards / 25),
+let rushingYards =(stats.rushing.yards / 10)
