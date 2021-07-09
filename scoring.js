@@ -22,12 +22,15 @@ function calculateScore(player) {
 
 // QB Score function
 function calculateQBScore(stats) {
-  let passingTouchdownScore = stats.passing.touchdowns * td
   let passingYardsScore = stats.passing.yards / 25
-  let rushingTouchdownScore = stats.rushing.touchdowns * td
+  let passingTouchdownScore = stats.passing.touchdowns * td
+  let interceptionScore = stats.passing.interceptions * turnover
   let rushingYards = stats.rushing.yards / 10
+  let rushingTouchdownScore = stats.rushing.touchdowns * td
+  let rushingFumbleScore = stats.rushing.fumbles * turnover
 
-  return passingTouchdownScore + passingYardsScore + rushingTouchdownScore + rushingYards
+  return passingTouchdownScore + passingYardsScore + rushingTouchdownScore + rushingYards +
+  interceptionScore + rushingFumbleScore
 }
 
 // RB Score function
@@ -53,16 +56,33 @@ function calculateRBScore(stats) {
 
 // WR Score function
 function calculateWRScore(stats) {
-  let rushingFumblesScore = stats.rushing.fumbles * turnover
+  let rushingYardsScore = stats.rushing.yards / 10
+  let rushingTouchdownScore = stats.rushing.touchdowns * td
+  let rushingFumbleScore = stats.rushing.fumbles * turnover
+  let receptionScore = stats.receiving.receptions * received
+  let receivingYardsScore = stats.receiving.yards / 10
+  let receivingTouchdownScore = stats.receiving.touchdowns * td
+  let receivingFumblesScore = stats.receiving.fumbles * turnover
+  let kickreturnYardsScore = stats.return.kickreturn.yards / 15
+  let kickreturnTouchdownScore = stats.return.kickreturn.touchdowns * td
+  let kickreturnFumbleScore = stats.return.kickreturn.fumbles * turnover
+  let puntreturnYardsScore = stats.return.puntreturn.yards / 15
+  let puntreturnTouchdownScore = stats.return.puntreturn.touchdowns * td
+  let puntreturnFumbleScore = stats.return.puntreturn.fumbles * turnover
 
-  return rushingFumblesScore
+  return rushingYardsScore + rushingTouchdownScore + rushingFumbleScore + receptionScore + receivingYardsScore +
+  receivingTouchdownScore + receivingFumblesScore + kickreturnYardsScore + kickreturnTouchdownScore + kickreturnFumbleScore +
+  puntreturnYardsScore + puntreturnTouchdownScore + puntreturnFumbleScore
 }
 
 // TE Score function
 function calculateTEScore(stats) {
+  let receptionScore = stats.receiving.receptions * received
+  let receivingYardsScore = stats.receiving.yards / 10
+  let receivingTouchdownScore = stats.receiving.touchdowns * td
   let receivingFumblesScore = stats.receiving.fumbles * turnover
 
-  return receivingFumblesScore
+  return receptionScore + receivingYardsScore + receivingTouchdownScore + receivingFumblesScore
 }
 
 // Default variable for Calculations
