@@ -71,8 +71,8 @@ function calculateWRScore(stats) {
   let puntreturnFumbleScore = stats.return.puntreturn.fumbles * turnover
 
   return rushingYardsScore + rushingTouchdownScore + rushingFumbleScore + receptionScore + receivingYardsScore +
-  receivingTouchdownScore + receivingFumblesScore + kickreturnYardsScore + kickreturnTouchdownScore + kickreturnFumbleScore +
-  puntreturnYardsScore + puntreturnTouchdownScore + puntreturnFumbleScore
+  receivingTouchdownScore + receivingFumblesScore + kickreturnYardsScore + kickreturnTouchdownScore +
+  kickreturnFumbleScore + puntreturnYardsScore + puntreturnTouchdownScore + puntreturnFumbleScore
 }
 
 // TE Score function
